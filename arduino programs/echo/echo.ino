@@ -2,7 +2,6 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   Serial.println("Connected to serial monitor");
-  Serial.println("Start the slay?");
 }
 
 void loop() {
@@ -11,6 +10,6 @@ void loop() {
   while (Serial.available() == 0) { }
 
   String incomingString = Serial.readString();
-  int incomingInt = Serial.read();
-  Serial.print("Received: " + incomingString + " and " + incomingInt);
+  // int incomingInt = Serial.read();
+  Serial.print("Received: " + incomingString);
 }

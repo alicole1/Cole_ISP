@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "node": "^22.15.0",
+    "serialport": "^13.0.0"
+  }
+}

@@ -58,9 +58,6 @@ sendBtn.addEventListener('click', async () => {
     console.log("Sent \"hello!\" ");
   } catch (e) {
     console.log("Could not send message to port.");
-  } finally {
-    // Allow the serial port to be closed later.
-    writer.releaseLock();
   }
   
 });

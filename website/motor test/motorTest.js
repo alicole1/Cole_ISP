@@ -1,7 +1,13 @@
+// DECLARE VARS
 
-// Declare variables:
+// motor vars
+const motor1Btn = document.getElementById("motor1Submit");
+const motor2Btn = document.getElementById("motor2Submit");
+let motor1Degree;
+let motor2Degree;
+
+// communication vars
 const connectBtn = document.getElementById("connect");
-const sendBtn = document.getElementById("send");
 const textEncoder = new TextEncoderStream(); // encoder for the writer.
 const textDecoder = new TextDecoderStream(); // decoder for the reader.
 
@@ -26,8 +32,8 @@ connectBtn.addEventListener("click", async () => {
     reader = textDecoder.readable.getReader(); // Initialize reader variable.
     readFromPort(); // Start read from port function.
 
-    sendBtn.disabled = false; // Let user press send button.
-
+    motor1Btn.disabled = false;
+    motor2Btn.disabled = false;
   } catch (e) {
     // Error occurs when selecting a device
     console.error("An error occured when selecting a serial port.");
@@ -54,14 +60,23 @@ async function readFromPort() {
   }
 }
 
+motor1Btn.onclick = function(){
+    motor1Degree = document.getElementById("motor1").value;
+    console.log(motor1Degree);
+    sendMessage("servo1:"+motor1Degree+".");
+};
 
-// Send button
-sendBtn.addEventListener('click', async () => {
+motor2Btn.onclick = function(){
+    motor2Degree = document.getElementById("motor2").value;
+    console.log(motor2Degree);
+    sendMessage("servo2:"+motor2Degree+".");
+};
+
+function sendMessage(message) {
   try {
-    writer.write("hello!");
-    console.log("Sent \"hello!\" ");
+    writer.write(message);
+    console.log("Sent \"" + message + "\" to arduino");
   } catch (e) {
     console.log("Could not send message to port.");
   }
-  
-});
+}

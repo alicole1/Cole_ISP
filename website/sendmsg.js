@@ -2,6 +2,7 @@
 // Declare variables:
 const connectBtn = document.getElementById("connect");
 const sendBtn = document.getElementById("send");
+const textDecoder = new TextDecoderStream();
 
 let port; // create port variable
 let writer; // create writer variable.
@@ -17,7 +18,9 @@ connectBtn.addEventListener("click", async () => {
 
     sendBtn.disabled = false; // Let user press send button.
     writer = port.writable.getWriter(); // Initialize writer.
-    reader = port.readable.getReader(); // Initialize reader variable.
+
+    readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
+    reader = textDecoder.readable.getReader(); // Initialize reader variable.
 
     readFromPort();
   } catch (e) {
@@ -59,6 +62,5 @@ sendBtn.addEventListener('click', async () => {
     // Allow the serial port to be closed later.
     writer.releaseLock();
   }
-
   
 });

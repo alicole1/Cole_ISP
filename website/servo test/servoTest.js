@@ -1,10 +1,10 @@
 // DECLARE VARS
 
-// motor vars
-const motor1Btn = document.getElementById("motor1Submit");
-const motor2Btn = document.getElementById("motor2Submit");
-let motor1Degree;
-let motor2Degree;
+// servo vars
+const servo1Btn = document.getElementById("servo1Submit");
+const servo2Btn = document.getElementById("servo2Submit");
+let servo1Degree;
+let servo2Degree;
 
 // communication vars
 const connectBtn = document.getElementById("connect");
@@ -32,8 +32,8 @@ connectBtn.addEventListener("click", async () => {
     reader = textDecoder.readable.getReader(); // Initialize reader variable.
     readFromPort(); // Start read from port function.
 
-    motor1Btn.disabled = false;
-    motor2Btn.disabled = false;
+    servo1Btn.disabled = false;
+    servo2Btn.disabled = false;
   } catch (e) {
     // Error occurs when selecting a device
     console.error("An error occured when selecting a serial port.");
@@ -41,6 +41,7 @@ connectBtn.addEventListener("click", async () => {
 });
 
 async function readFromPort() {
+  let myArray = ["Arduino message: "];
   while (port.readable) {
     try {
       while (true) {
@@ -51,25 +52,28 @@ async function readFromPort() {
           break;
         }
         if (value) {
-          console.log(value);
+          myArray.push(value);
+          if (value.includes('\n')) {
+            console.log(myArray.join(""));
+            myArray = ["Arduino message: "]
+          }
         }
+
       }
     } catch (e) {
       // TODO: Handle non-fatal read error.
-    } 
+    }
   }
 }
 
-motor1Btn.onclick = function(){
-    motor1Degree = document.getElementById("motor1").value;
-    console.log(motor1Degree);
-    sendMessage("servo1:"+motor1Degree+".");
+servo1Btn.onclick = function(){
+    servo1Degree = document.getElementById("servo1").value;
+    sendMessage("servo1:"+servo1Degree+".");
 };
 
-motor2Btn.onclick = function(){
-    motor2Degree = document.getElementById("motor2").value;
-    console.log(motor2Degree);
-    sendMessage("servo2:"+motor2Degree+".");
+servo2Btn.onclick = function(){
+    servo2Degree = document.getElementById("servo2").value;
+    sendMessage("servo2:"+servo2Degree+".");
 };
 
 function sendMessage(message) {

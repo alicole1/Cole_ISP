@@ -7,18 +7,23 @@
   <link rel="stylesheet" href="style.css" />
   <title>Servo Test</title>
   <script src="servoTest.js" defer></script>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Servo Demo!</h1>
     <button id="connect">connect to port</button> <br><br>
 
+    <div class="servo-control">
     <label>Servo 1: </label>
-    <input id="servo1">
+    <input id="servo1" type="number">
     <button id="servo1Submit" disabled>submit</button>
+    </div>
 
     <br> <br>
+    <div class="servo-control">
     <label>Servo 2: </label>
-    <input id="servo2">
+    <input id="servo2" type="number">
     <button id="servo2Submit" disabled>submit</button>
+    </div>
 </body>
 </html>

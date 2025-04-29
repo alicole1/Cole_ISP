@@ -58,7 +58,6 @@ async function readFromPort() {
             myArray = ["Arduino message: "]
           }
         }
-
       }
     } catch (e) {
       // TODO: Handle non-fatal read error.

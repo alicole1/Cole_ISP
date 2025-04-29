@@ -1,10 +1,16 @@
 // DECLARE VARS
 
-// servo vars
-const servo1Btn = document.getElementById("servo1Submit");
-const servo2Btn = document.getElementById("servo2Submit");
-let servo1Degree;
-let servo2Degree;
+// servo 1 vars
+var servo1Slider = document.getElementById("servo1Slider");
+var dispPosServo1 = document.getElementById("dispPosServo1");
+var servo1Pos = servo1Slider.value;
+dispPosServo1.innerHTML = servo1Pos; // Display the default slider value
+
+// servo 2 vars
+var servo2Slider = document.getElementById("servo2Slider");
+var dispPosServo2 = document.getElementById("dispPosServo2");
+var servo2Pos = servo2Slider.value;
+dispPosServo2.innerHTML = servo2Pos; // Display the default slider value
 
 // communication vars
 const connectBtn = document.getElementById("connect");
@@ -32,8 +38,8 @@ connectBtn.addEventListener("click", async () => {
     reader = textDecoder.readable.getReader(); // Initialize reader variable.
     readFromPort(); // Start read from port function.
 
-    servo1Btn.disabled = false;
-    servo2Btn.disabled = false;
+    servo1Slider.disabled = false;
+    servo2Slider.disabled = false;
   } catch (e) {
     // Error occurs when selecting a device
     console.error("An error occured when selecting a serial port.");
@@ -65,16 +71,6 @@ async function readFromPort() {
   }
 }
 
-servo1Btn.onclick = function(){
-    servo1Degree = document.getElementById("servo1").value;
-    sendMessage("servo1:"+servo1Degree+".");
-};
-
-servo2Btn.onclick = function(){
-    servo2Degree = document.getElementById("servo2").value;
-    sendMessage("servo2:"+servo2Degree+".");
-};
-
 function sendMessage(message) {
   try {
     writer.write(message);
@@ -82,4 +78,17 @@ function sendMessage(message) {
   } catch (e) {
     console.log("Could not send message to port.");
   }
+}
+
+servo1Slider.oninput = function() {
+  servo1Pos = this.value;
+  dispPosServo1.innerHTML = servo1Pos;
+  sendMessage("servo1:"+servo1Pos+".");
+}
+
+
+servo2Slider.oninput = function() {
+  servo2Pos = this.value;
+  dispPosServo2.innerHTML = servo2Pos;
+  sendMessage("servo2:"+servo2Pos+".");
 }

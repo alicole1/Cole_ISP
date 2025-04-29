@@ -10,20 +10,21 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Servo Demo!</h1>
-    <button id="connect">connect to port</button> <br><br>
+  <div class="container">
+    <h1>Servo Demo</h1>
+    <button id="connect">Connect to port</button>
 
     <div class="servo-control">
-    <label>Servo 1: </label>
-    <input id="servo1" type="number">
-    <button id="servo1Submit" disabled>submit</button>
+      <h2>Servo 1</h2>
+      <input type="range" min="1" max="100" value="50" class="slider" id="servo1Slider" disabled="true">
+      <p id="dispPosServo1"></p>
     </div>
 
-    <br> <br>
     <div class="servo-control">
-    <label>Servo 2: </label>
-    <input id="servo2" type="number">
-    <button id="servo2Submit" disabled>submit</button>
+      <h2>Servo 2</h2>
+      <input type="range" min="1" max="100" value="50" class="slider" id="servo2Slider" disabled="true">
+      <p id="dispPosServo2"></p>
     </div>
+  </div>
 </body>
 </html>

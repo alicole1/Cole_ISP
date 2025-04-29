@@ -3,6 +3,7 @@
 // servo 1 vars
 var servo1Slider = document.getElementById("servo1Slider");
 var dispPosServo1 = document.getElementById("dispPosServo1");
+const sliders = document.querySelectorAll(".slider");
 var servo1Pos = servo1Slider.value;
 dispPosServo1.innerHTML = servo1Pos; // Display the default slider value
 
@@ -79,6 +80,19 @@ function sendMessage(message) {
     console.log("Could not send message to port.");
   }
 }
+
+// Pulse animation on connect button if user hovers over 
+// either slider while disabled
+sliders.forEach(slider => {
+  slider.addEventListener("mouseenter", () => {
+    if(slider.disabled) {
+      connectBtn.classList.add("pulse");
+    }
+  })
+  slider.addEventListener("mouseleave", () => {
+    connectBtn.classList.remove("pulse");
+  })
+})
 
 servo1Slider.oninput = function() {
   servo1Pos = this.value;

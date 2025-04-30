@@ -1,0 +1,13 @@
+#popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid black;
+    padding: 20px;
+    z-index: 1000;
+    width: 300px; /* Adjust as needed */
+    height: 200px; /* Adjust as needed */
+}

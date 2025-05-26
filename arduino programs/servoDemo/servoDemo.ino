@@ -3,6 +3,7 @@
 
 Servo servo1;
 Servo servo2;
+Servo servo3;
 String servo;
 int int_pos;
 
@@ -10,8 +11,9 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   Serial.println("Connected to serial monitor");
-  servo1.attach(9);
-  servo2.attach(10);
+  servo1.attach(8);
+  servo2.attach(9);
+  servo3.attach(10);
 }
 
 void loop() {
@@ -29,9 +31,16 @@ void loop() {
 }
 
 void updateServo() {
-  if (servo.equals("servo1")) {
+  if (servo.equals("base")) {
     servo1.write(int_pos);
-  } else if (servo.equals("servo2")) {
+  } else if (servo.equals("shoulder")) {
+    Serial.println("Moving shoulder to " + String(int_pos));
+    Serial.println("Moving opposing shoulder to " + String(270 - int_pos));
+    Serial.println("____________________________");
     servo2.write(int_pos);
+    servo3.write(180 - int_pos);
   }
+}
+
+void updateShoulder(int pos) {
 }

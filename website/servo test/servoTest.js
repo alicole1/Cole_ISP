@@ -94,12 +94,31 @@ sliders.forEach(slider => {
   })
 })
 
-servo1Slider.oninput = function() {
-  servo1Pos = this.value;
-  dispPosServo1.innerHTML = servo1Pos;
-  sendMessage("servo1:"+servo1Pos+".");
-}
+servo1Slider.oninput = function () {
+  pendingServo1Value = parseInt(this.value);
+  dispPosServo1.innerHTML = pendingServo1Value;
 
+  if (!sendingInProgress) {
+    sendingInProgress = true;
+    sendLatestValue();
+  }
+};
+
+function sendLatestValue() {
+  if (pendingServo1Value !== null) {
+    sendMessage("servo1:" + pendingServo1Value + ".");
+    pendingServo1Value = null;
+    lastSentTime = Date.now();
+  }
+
+  setTimeout(() => {
+    if (pendingServo1Value !== null) {
+      sendLatestValue(); // send the most recent one
+    } else {
+      sendingInProgress = false; // no more messages, so we're done
+    }
+  }, sendDelay);
+}
 
 servo2Slider.oninput = function() {
   servo2Pos = this.value;

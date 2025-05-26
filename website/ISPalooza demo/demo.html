@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robotic Arm Demo</title>
+  <script src="demo.js" defer></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="topnav">
+    <a class="active" href="#home">Home</a>
+    <a href="#" id="nav-connect">Connect to Arm</a>
+    <a href="#" id="nav-tutorial">Tutorial</a>
+    <a href="https://docs.google.com/presentation/d/1xfXAnKhogwhFsAfD8qe8t7AYUe2JQsTPoLWwKquk9V4/edit?slide=id.g305277049db_1_114#slide=id.g305277049db_1_114" target="_blank">Journal</a>
+  </div>
+  <div class="container">
+    <h1>Servo Demo</h1>
+    <button id="connect">Connect to port</button>
+    <button id="checkPos"> Check positions</button>
+    <button id="startTutorial">Start Tutorial</button>
+  </div>
+  <div id="popupContainer">
+    <div id="popupContent"></div>
+    <div id="popupControls">
+      <button id="prevPopup">Previous</button>
+      <button id="nextPopup">Next</button>
+  </div>
+
+  </div>
+
+</body>
+</html>
